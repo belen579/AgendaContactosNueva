@@ -1,5 +1,6 @@
 package com.antonio.agendajetpackcompose.ui.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -49,11 +50,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.antonio.agendajetpackcompose.R
+
 import com.antonio.agendajetpackcompose.ui.model.ContactosFinales
 import com.antonio.agendajetpackcompose.ui.navigation.Screens
 import com.antonio.agendajetpackcompose.ui.viewmodel.AgendaViewModel
+import com.example.agendajetpackcomposeantonio.R
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun EditarContacto(navController: NavHostController, viewModel: AgendaViewModel){
@@ -61,7 +64,7 @@ fun EditarContacto(navController: NavHostController, viewModel: AgendaViewModel)
         topBar = {
             MyTopBar4(navController, viewModel)
         },
-        content = { padding ->
+        content = {
             ContenidoEditarContacto(navController, viewModel)
         },
 

@@ -1,5 +1,6 @@
 package com.antonio.agendajetpackcompose.ui.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -32,6 +33,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -54,6 +56,7 @@ import com.antonio.agendajetpackcompose.ui.navigation.Screens
 import com.antonio.agendajetpackcompose.ui.viewmodel.AgendaViewModel
 
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Agenda(navController: NavHostController, viewModel: AgendaViewModel) {
@@ -62,7 +65,7 @@ fun Agenda(navController: NavHostController, viewModel: AgendaViewModel) {
         topBar = {
             MyTopBar(navController,viewModel)
         },
-        content = {padding ->
+        content = {
             Contenido(navController,viewModel)
         }
     )
@@ -78,7 +81,7 @@ fun MyTopBar(navController: NavHostController,
              viewModel: AgendaViewModel,
              backgroundColor: Color = Color(10, 48, 100),//azul
              contentColor: Color = Color(232, 18, 36),//rojo
-             elevation: Dp = AppBarDefaults.TopAppBarElevation
+          //   elevation: Dp = AppBarDefaults.TopAppBarElevation
              ) {
     val context= LocalContext.current
 
@@ -118,7 +121,7 @@ fun MyTopBar(navController: NavHostController,
         },
         backgroundColor = backgroundColor,
         contentColor = contentColor,
-        elevation = elevation
+      //  elevation = elevation
 
     )
 

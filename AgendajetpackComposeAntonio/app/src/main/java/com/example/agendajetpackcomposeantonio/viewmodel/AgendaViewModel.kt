@@ -11,9 +11,10 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.antonio.agendajetpackcompose.R
+
 import com.antonio.agendajetpackcompose.ui.model.Contactos
 import com.antonio.agendajetpackcompose.ui.model.ContactosFinales
+import com.example.agendajetpackcomposeantonio.R
 import java.io.ByteArrayOutputStream
 import java.io.EOFException
 import java.io.File

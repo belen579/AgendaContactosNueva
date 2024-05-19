@@ -25,38 +25,45 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.agendacontactos_objetos.Data.Contacto
 import com.example.agendacontactos_objetos.Data.viewModelContacto
-import com.example.agendacontactos_objetos.R
+import com.example.agendacontactosnueva.R
 import com.example.agendacontactos_objetos.navigation.Screens
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "SuspiciousIndentation")
+
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter", "SuspiciousIndentation",
+    "UnrememberedMutableState"
+)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 
-fun fichacontactoModificar(viewModelContacto: viewModelContacto, navController: NavController) {
+fun fichacontactoModificar(viewModel: viewModelContacto, navController: NavController, idusuario: String?) {
 
-    var nombre by rememberSaveable {
-        mutableStateOf("")
-    }
-    var email by rememberSaveable {
-        mutableStateOf("")
-    }
-    var telefono by rememberSaveable {
-        mutableStateOf("")
-    }
+    println("Este es el id $idusuario")
+
+
+
+    var idint = idusuario?.toInt()
+
+    val contacto = idint?.let { viewModel.obtenerContactoPorId(it) }
+    var nombrerecibido2 by mutableStateOf(contacto?.nombre.toString())
+    var emailrecibido by mutableStateOf(contacto?.email.toString())
+    var telefonorecibido by mutableStateOf(contacto?.telefono.toString())
+
+
+
+
 
     var context = LocalContext.current
-
-
 
     Scaffold(
 
@@ -66,16 +73,19 @@ fun fichacontactoModificar(viewModelContacto: viewModelContacto, navController: 
                 actions = {
                     IconButton(onClick = {
 
-                        val contacto = Contacto(
-                            nombre,
-                            telefono,
-                            email,
+                        val contactomodificado = Contacto(
+                            nombrerecibido2,
+                            telefonorecibido,
+                            emailrecibido,
                             R.drawable.neutra,
-                            viewModelContacto.nextid
+                            viewModel.nextid
                         )
-                        viewModelContacto.guardarcontactoarchivo(
-                            contacto
+                        viewModel.guardarcontactoarchivo(
+                            contactomodificado
                         )
+                        if (contacto != null) {
+                            viewModel.borrar(contacto)
+                        }
 
 
 
@@ -117,13 +127,19 @@ fun fichacontactoModificar(viewModelContacto: viewModelContacto, navController: 
             ) {
                 Icon(Icons.Default.AccountCircle, contentDescription = null)
                 Spacer(modifier = Modifier.width(8.dp))
+
                 OutlinedTextField(
-                    value = viewModelContacto.contactorecibido.nombre,
-                    onValueChange = { nombre = it },
+
+                    value = nombrerecibido2,
+                    onValueChange = { nombrerecibido2 = it },
                     label = { Text("Nombre") },
                     modifier = Modifier.fillMaxWidth()
                 )
             }
+
+
+
+
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -134,8 +150,8 @@ fun fichacontactoModificar(viewModelContacto: viewModelContacto, navController: 
                 Icon(Icons.Default.Call, contentDescription = null)
                 Spacer(modifier = Modifier.width(8.dp))
                 OutlinedTextField(
-                    value = telefono,
-                    onValueChange = { telefono = it },
+                    value = telefonorecibido,
+                    onValueChange = { telefonorecibido = it },
                     label = { Text("Telefono") },
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -151,16 +167,20 @@ fun fichacontactoModificar(viewModelContacto: viewModelContacto, navController: 
                 Icon(Icons.Default.Email, contentDescription = null)
                 Spacer(modifier = Modifier.width(8.dp))
                 OutlinedTextField(
-                    value = email,
-                    onValueChange = { email = it },
+                    value = emailrecibido,
+                    onValueChange = { emailrecibido = it },
                     label = { Text("Email") },
                     modifier = Modifier.fillMaxWidth()
                 )
             }
-
-//
-
         }
+
+
+
+
 
     }
 }
+
+
+

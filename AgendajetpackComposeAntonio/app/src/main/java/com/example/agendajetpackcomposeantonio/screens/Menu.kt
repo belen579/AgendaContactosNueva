@@ -23,9 +23,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.antonio.agendajetpackcompose.R
+
 import com.antonio.agendajetpackcompose.ui.navigation.Screens
 import com.antonio.agendajetpackcompose.ui.viewmodel.AgendaViewModel
+import com.example.agendajetpackcomposeantonio.R
 
 @Composable
 fun Menu(navController: NavHostController, viewModel: AgendaViewModel) {

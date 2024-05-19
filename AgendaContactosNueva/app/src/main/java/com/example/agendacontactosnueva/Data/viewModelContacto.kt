@@ -2,10 +2,8 @@ package com.example.agendacontactos_objetos.Data
 
 import android.annotation.SuppressLint
 import android.content.Context
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.agendacontactosnueva.R
@@ -27,30 +25,15 @@ class viewModelContacto(private val context: Context): ViewModel() {
     var list = mutableListOf<Contacto>()
     var nextid: Int = 1
 
-    var FILE = File(context.filesDir, "nuevo.dat")
+    var FILE = File(context.filesDir, "nuevo2.dat")
 
     var nombre by mutableStateOf("")
     var telefono by mutableStateOf("")
     var email by mutableStateOf("")
 
 
-
-    var contactorecibido by mutableStateOf(Contacto("","","",0,0))
-    private set
-  /*  fun obtenerNombreContactoRecibido(): String {
-        return contactorecibido.nombre
-    }
-
-    // Método para obtener el email del contacto recibido
-    fun obtenerEmailContactoRecibido(): String {
-        return contactorecibido.email
-    }
-
-    // Método para obtener el teléfono del contacto recibido
-    fun obtenerTelefonoContactoRecibido(): String {
-        return contactorecibido.telefono
-    }
-*/
+    var contactorecibido = mutableStateOf(Contacto("", "", "", 0, 0))
+        private set
 
     init {
 
@@ -71,7 +54,7 @@ class viewModelContacto(private val context: Context): ViewModel() {
             guardarContactosEnArchivo()
 
 
-        }else{
+        } else {
             list = cargarContactos()
         }
     }
@@ -81,7 +64,7 @@ class viewModelContacto(private val context: Context): ViewModel() {
 
         try {
             val objectOutputStream = ObjectOutputStream(FileOutputStream(FILE))
-            list.forEach {contacto->
+            list.forEach { contacto ->
                 objectOutputStream.writeObject(contacto)
             }
             objectOutputStream.close()
@@ -91,6 +74,7 @@ class viewModelContacto(private val context: Context): ViewModel() {
         }
 
     }
+
     fun cargarContactos(): MutableList<Contacto> {
 
 
@@ -120,14 +104,15 @@ class viewModelContacto(private val context: Context): ViewModel() {
     @SuppressLint("SuspiciousIndentation")
     fun guardarcontactoarchivo(contacto: Contacto) {
 
+
         list.add(contacto)
 
 
 
         try {
             val objectOutputStream = ObjectOutputStream(FileOutputStream(FILE))
-            list.sortBy {it.nombre  }
-            list.forEach {contacto->
+            list.sortBy { it.nombre }
+            list.forEach { contacto ->
                 objectOutputStream.writeObject(contacto)
             }
             objectOutputStream.close()
@@ -137,25 +122,33 @@ class viewModelContacto(private val context: Context): ViewModel() {
         }
 
 
-    // Importante en objetos no podemos poner append a true para que escriba al final el ObjectOutputStream
-    // no es compatible con esta forma de escritura en archivos.
-    // Hay que en un archivo abierto en modo de adición simplemente escribirá la nueva información al final del archivo,
-    // pero no será capaz de manejar correctamente el flujo de objetos serializados.
-    // //Para resolver esto, debes mantener el archivo cerrado y abrirlo en modo de escritura normal cada vez que necesites escribir un nuevo objeto.
+        // Importante en objetos no podemos poner append a true para que escriba al final el ObjectOutputStream
+        // no es compatible con esta forma de escritura en archivos.
+        // Hay que en un archivo abierto en modo de adición simplemente escribirá la nueva información al final del archivo,
+        // pero no será capaz de manejar correctamente el flujo de objetos serializados.
+        // //Para resolver esto, debes mantener el archivo cerrado y abrirlo en modo de escritura normal cada vez que necesites escribir un nuevo objeto.
 
 
     }
 
+
+
+
+
+
+
+
+
     fun borrar(contactoenviado: Contacto) {
         println("lista antes de borrar")
         println(list)
-       // println(contactoenviado.toString())
+        // println(contactoenviado.toString())
         list.remove(contactoenviado)
         println("lista despues de borrar")
         println(list)
-        if(FILE.delete()){
+        if (FILE.delete()) {
             println("Archivo borrado")
-        }else{
+        } else {
             println("Archivo NO BORRADO")
         }
 
@@ -165,28 +158,31 @@ class viewModelContacto(private val context: Context): ViewModel() {
     }
 
     @SuppressLint("SuspiciousIndentation")
-    fun modificar(contactoenviado: Contacto) {
+    fun modificar(contactoenviado: Contacto): Contacto {
 
 
-        contactorecibido= contactoenviado
+        contactorecibido.value = contactoenviado
+        return contactorecibido.value
 
-
-        //borrar(contactoenviado)
-
-
-
-
-
-        println(contactorecibido.nombre)
-
-
-
-
-
-
+        println("He recibido  ${contactorecibido.value.nombre} ")
 
 
     }
+
+    fun obtenerContactoPorId(id: Int): Contacto? {
+        cargarContactos()
+        println(id)
+
+        val contacto = list.find { it.id== id }
+        println(contacto)
+      return contacto
+
+    }
+}
+
+
+
+
 
 
 
@@ -210,7 +206,8 @@ class viewModelContacto(private val context: Context): ViewModel() {
         list = contactosActualizados // Actualiza la lista en memoria
 
 */
-    }
+
+
 
 
 

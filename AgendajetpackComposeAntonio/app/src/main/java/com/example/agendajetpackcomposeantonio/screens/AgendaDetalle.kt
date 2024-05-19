@@ -1,5 +1,6 @@
 package com.antonio.agendajetpackcompose.ui.screens
 
+import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -51,12 +52,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.antonio.agendajetpackcompose.R
+
 import com.antonio.agendajetpackcompose.ui.model.ContactosFinales
 import com.antonio.agendajetpackcompose.ui.navigation.Screens
 import com.antonio.agendajetpackcompose.ui.viewmodel.AgendaViewModel
 
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AgendaDetalle(navController: NavHostController, viewModel: AgendaViewModel) {
@@ -65,7 +67,7 @@ fun AgendaDetalle(navController: NavHostController, viewModel: AgendaViewModel) 
         topBar = {
             MyTopBar2(navController,viewModel)
         },
-        content = {padding ->
+        content = {
             ContenidoDetalle(navController, viewModel)
         },
         bottomBar = {

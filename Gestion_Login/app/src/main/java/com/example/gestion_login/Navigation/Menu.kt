@@ -1,4 +1,13 @@
 package com.example.gestion_login.Navigation
 
-class Menu {
+sealed class Screens(val route: String) {
+
+
+    object inicio: Screens("Login")
+    object principal : Screens ("Principal")
+
+
+
+
+
 }

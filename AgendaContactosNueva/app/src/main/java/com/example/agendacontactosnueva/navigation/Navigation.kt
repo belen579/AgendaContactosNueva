@@ -1,18 +1,17 @@
 package com.example.agendacontactos_objetos.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.agendacontactos_objetos.Data.Contacto
+import androidx.navigation.navArgument
 import com.example.agendacontactos_objetos.Data.viewModelContacto
 import com.example.agendacontactos_objetos.Screens.fichacontacto
 import com.example.agendacontactos_objetos.Screens.fichacontactoModificar
 
-import com.example.agendacontactos_objetos.preview
+
+import com.example.agendacontactosnueva.preview
 
 @Composable
 fun Navigation(){
@@ -20,6 +19,7 @@ fun Navigation(){
     val navController = rememberNavController()
     val context = LocalContext.current
     val viewmodelcontacto =  (viewModelContacto(context))
+    val id:Int =0
 
     NavHost(navController, startDestination = Screens.inicio.route){
         composable(route=Screens.inicio.route){
@@ -28,8 +28,11 @@ fun Navigation(){
             fichacontacto(viewmodelcontacto,navController)  //Nombre de la funcion a ejecutar
         }
 
-        composable(route= Screens.ficha.route){
-            fichacontactoModificar(viewmodelcontacto,navController)  //Nombre de la funcion a ejecutar
+        composable(route= Screens.fichamodificar.route){
+                backStackEntry ->
+            val idUsuario = backStackEntry.arguments?.getString("idUsuario")
+
+            fichacontactoModificar(viewmodelcontacto,navController, idUsuario)  //Nombre de la funcion a ejecutar
         }
 
 
@@ -37,3 +40,7 @@ fun Navigation(){
 
 
 }
+
+
+
+

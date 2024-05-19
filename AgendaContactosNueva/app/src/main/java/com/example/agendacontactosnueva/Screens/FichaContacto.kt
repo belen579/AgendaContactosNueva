@@ -35,7 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.agendacontactos_objetos.Data.Contacto
 import com.example.agendacontactos_objetos.Data.viewModelContacto
-import com.example.agendacontactos_objetos.R
+import com.example.agendacontactosnueva.R
 import com.example.agendacontactos_objetos.navigation.Screens
 
 
