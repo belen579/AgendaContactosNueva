@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Ejemplo4_Calculadora</string>
+    <string name="Calculadora">Calculadora</string>
+    <string name="Primer_Operando">Primer Operando</string>
+    <string name="Introduce_Operando">Introduce el Operando</string>
+    <string name="Segundooperando">Segundo Operando</string>
+    <string name="Suma">Suma</string>
+    <string name="Resta">Resta</string>
+    <string name="multiplicacion">Multiplicación</string>
+    <string name="Division">División</string>
+    <string name="Indicar_operacion">Indica la Operación que quiere realizar</string>
+    <string name="Borrar">Borrar</string>
+    <string name="Calcular">Calcular</string>
+</resources>
