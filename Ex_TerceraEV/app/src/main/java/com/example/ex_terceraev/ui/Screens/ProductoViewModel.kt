@@ -79,7 +79,7 @@ class ProductoViewModel: ViewModel() {
         total-= producto.precio;
 
 
-
+//
     }
 
 
